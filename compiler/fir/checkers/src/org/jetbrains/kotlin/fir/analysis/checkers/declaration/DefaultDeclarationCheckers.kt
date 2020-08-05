@@ -15,18 +15,18 @@ object CommonDeclarationCheckers : DeclarationCheckers() {
         FirManyCompanionObjectsChecker,
         FirLocalEntityNotAllowedChecker,
         FirTypeParametersInObjectChecker,
-    )
+    ) + ExtendedDeclarationCheckers.declarationCheckers
 
     override val memberDeclarationCheckers: List<FirMemberDeclarationChecker> = listOf(
         FirInfixFunctionDeclarationChecker,
         FirExposedVisibilityDeclarationChecker,
-    )
+    ) + ExtendedDeclarationCheckers.memberDeclarationCheckers
 
     override val constructorCheckers: List<FirConstructorChecker> = listOf(
         FirConstructorAllowedChecker,
-    )
+    ) + ExtendedDeclarationCheckers.constructorCheckers
 
     override val controlFlowAnalyserCheckers: List<FirControlFlowChecker> = listOf(
         FirPropertyInitializationAnalyzer
-    )
+    ) + ExtendedDeclarationCheckers.controlFlowAnalyserCheckers
 }

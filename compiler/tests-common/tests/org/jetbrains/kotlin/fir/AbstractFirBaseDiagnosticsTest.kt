@@ -22,9 +22,6 @@ import org.jetbrains.kotlin.checkers.utils.CheckerTestUtil
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
 import org.jetbrains.kotlin.cli.jvm.compiler.TopDownAnalyzerFacadeForJVM
 import org.jetbrains.kotlin.diagnostics.PsiDiagnosticUtils
-import org.jetbrains.kotlin.fir.analysis.checkers.declaration.ExtendedDeclarationCheckers
-import org.jetbrains.kotlin.fir.analysis.checkers.expression.ExtendedExpressionCheckers
-import org.jetbrains.kotlin.fir.analysis.checkersComponent
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirDiagnostic
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirPsiDiagnostic
 import org.jetbrains.kotlin.fir.builder.RawFirBuilder
@@ -336,8 +333,5 @@ abstract class AbstractFirBaseDiagnosticsTest : BaseDiagnosticsTest() {
         return result
     }
 
-    protected open fun configureSession(session: FirSession) {
-        session.checkersComponent.register(ExtendedDeclarationCheckers)
-        session.checkersComponent.register(ExtendedExpressionCheckers)
-    }
+    protected open fun configureSession(session: FirSession) {}
 }
