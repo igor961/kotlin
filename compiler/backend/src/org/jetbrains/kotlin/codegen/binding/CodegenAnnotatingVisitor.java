@@ -821,19 +821,22 @@ class CodegenAnnotatingVisitor extends KtVisitorVoid {
 
         Map<ValueParameterDescriptor, ResolvedValueArgument> arguments = newResolvedCall.getValueArguments();
         for (ValueParameterDescriptor valueParameter : arguments.keySet()) {
-            SamType samType = SamType.createByValueParameter(valueParameter);
-            if (samType == null) continue;
-
             ResolvedValueArgument argument = arguments.get(valueParameter);
             if (argument instanceof ExpressionValueArgument) {
                 ValueArgument valueArgument = ((ExpressionValueArgument) argument).getValueArgument();
                 if (valueArgument != null && newResolvedCall.getExpectedTypeForSamConvertedArgument(valueArgument) != null) {
+                    SamType samType = SamType.createByValueParameter(valueParameter);
+                    if (samType == null) continue;
+
                     recordSamTypeOnArgumentExpression(samType, valueArgument);
                 }
             } else if (argument instanceof VarargValueArgument) {
                 VarargValueArgument varargValueArgument = (VarargValueArgument) argument;
                 for (ValueArgument valueArgument : varargValueArgument.getArguments()) {
                     if (valueArgument != null && newResolvedCall.getExpectedTypeForSamConvertedArgument(valueArgument) != null) {
+                        SamType samType = SamType.createByValueParameter(valueParameter);
+                        if (samType == null) continue;
+
                         recordSamTypeOnArgumentExpression(samType, valueArgument);
                     }
                 }
